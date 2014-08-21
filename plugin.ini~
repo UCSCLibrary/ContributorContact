@@ -1,0 +1,10 @@
+[info]
+name="Contributor Contact"
+author="Ned Henry"
+description="Supplies administrators with tools to contact contributors in bulk"
+license="GPLv3"
+link=""
+support_link=""
+omeka_minimum_version="2.1"
+omeka_target_version="2.2"
+version="1.0.0"

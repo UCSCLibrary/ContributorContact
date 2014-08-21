@@ -1,0 +1,6 @@
+jQuery(document).load(function(){
+    jQuery('#displayContribEmails').click(function(e) {
+	$emails = jQuery.get('emails');
+	alert($emails);
+    });
+});

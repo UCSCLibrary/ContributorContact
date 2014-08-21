@@ -1,0 +1,9 @@
+<?php
+
+$head = array('bodyclass' => 'contibutor-contact primary', 
+              'title' => html_escape(__('Contributor Contact | Import documents')));
+echo head($head);
+echo flash(); 
+echo $form;
+echo foot(); 
+?>
