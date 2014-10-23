@@ -20,7 +20,7 @@ class ContributorContact_IndexController extends Omeka_Controller_AbstractAction
     private $_emailString;
 
     /**
-     * The default action to display the import from and process it.
+     * The default action to retrieve emails and usernames of contributors.
      *
      * This action runs before loading the main import form. It 
      * processes the form output if there is any, and populates
