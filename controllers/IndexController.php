@@ -59,18 +59,27 @@ class ContributorContact_IndexController extends Omeka_Controller_AbstractAction
      */
     public function emailsAction()
     {
-        $db=get_db();
-        $sql = "SELECT DISTINCT user.email,user.id,user.username,user.name FROM ".$db->User." AS user"
-            ." LEFT JOIN (".$db->Item." AS item,"
-            .$db->ContributionContributedItem." AS citem )"
-            ." ON ( user.id = item.owner_id AND item.id = citem.item_id)";
-        $db = get_db();
-        $reply = $db->query($sql);
+      $this->_validatePost();
+      $db=get_db();
 
-        while(is_array($user = $reply->fetch())) {
-            $this->_emails[] = str_replace('@',' at ',$user['email']);
-        }
-
-        die(json_encode($this->_emails));
+      $sql = "SELECT DISTINCT user.email,user.id,user.username,user.name FROM ".$db->User." AS user"
+	." LEFT JOIN (".$db->Item." AS item,"
+	.$db->ContributionContributedItem." AS citem )"
+	." ON ( user.id = item.owner_id AND item.id = citem.item_id)";
+      $db = get_db();
+      $reply = $db->query($sql);
+      
+      while(is_array($user = $reply->fetch())) {
+	$this->_emails[] = str_replace('@',' at ',$user['email']);
+      }
+      
+      die(json_encode($this->_emails));
+    }
+    
+    private function _validatePost(){
+      $csrf = new Omeka_Form_SessionCsrf;
+      if(!$csrf->isValid($_POST))
+	die("ERROR!");
+      return true;
     }
 }

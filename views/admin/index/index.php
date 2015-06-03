@@ -7,6 +7,8 @@ echo flash();
 ?>
 <a href="MailTo:<?php echo($emailString)?>"><button>Email All Contributors</button></a>
 <button id="displayContribEmails">Display All Contributor Emails</button>
+  <?php $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');?>
+  <script var csrf_token="<?php echo $csrf->getToken();?>";</script>
 <?php
     if(count($users)>0) {
         echo('<h2>List of Contributors</h2><table><tr><td><strong>Name</strong></td><td><strong>Username</strong></td><td><strong>Email</strong></td></tr>');

@@ -1,7 +1,9 @@
 jQuery(document).ready(function(){
 
     jQuery('#displayContribEmails').click(function(e) {
-	jQuery.get('contributor-contact/index/emails',function(data) {
+	jQuery.post('contributor-contact/index/emails',
+		    {csrf_token:csrf_token},
+		    function(data) {
 	    alert(formatEmails(jQuery.parseJSON(data),'; '));
 	});
     });
