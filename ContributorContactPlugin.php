@@ -137,9 +137,14 @@ class ContributorContactPlugin extends Omeka_plugin_AbstractPlugin
           $subject = get_option('contribsPermalinkSubject');
           $message = get_option('contribsPermalinkMessage');
           $message = str_replace('[link]',link_to($item),$message);
-          $recipient = $contributor->email;
-          mail($recipient,$subject,$message,$headers);
-          die($recipient.$subject.$message.$headers);
+          $from = get_option('administrator_email');
+          $mail = new Zend_Mail('UTF-8');
+          $mail->setBodyHtml($message);
+          $mail->setFrom($from, "$siteTitle Administrator");
+          $mail->addTo($contributor->email, $contributor->name);
+          $mail->setSubject($subject);
+          $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
+          $mail->send();
       }
     }
     /**
